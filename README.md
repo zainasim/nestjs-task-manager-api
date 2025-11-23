@@ -19,8 +19,6 @@ This project uses **REST API with Swagger documentation** instead of GraphQL. He
 3. **Standard HTTP Methods**: REST follows standard HTTP conventions (GET, POST, PATCH, DELETE) which are intuitive
 4. **Pagination & Filtering**: REST APIs handle offset-based and cursor-based pagination more naturally with query parameters
 
-```
-
 ## Prerequisites
 
 - Node.js (v18 or higher)
@@ -28,6 +26,12 @@ This project uses **REST API with Swagger documentation** instead of GraphQL. He
 - npm or yarn
 
 ## Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/zainasim/nestjs-task-manager-api.git
+   cd backend-assignment
+   ```
 
 2. **Install dependencies**:
    ```bash
@@ -158,6 +162,34 @@ The Swagger UI at `http://localhost:3000/api` provides an interactive interface 
 - Role-based access control enforced at route level
 - Input validation on all endpoints
 
+## Usage Flow
+
+### Getting Started
+
+1. **Login as Admin**:
+   - Use the seeded admin credentials (or your custom `ADMIN_EMAIL` and `ADMIN_PASSWORD`)
+   - POST to `/auth/login` to get an access token
+
+2. **Create Invitation**:
+   - Use the admin token in the Authorization header: `Bearer <token>`
+   - POST to `/invitations` with the user's email
+   - Copy the invitation token from the response (also logged to console)
+
+3. **User Signup**:
+   - POST to `/auth/signup` with:
+     - Email (must match invitation email)
+     - Password
+     - Invitation token
+     - First name and last name (optional)
+
+4. **User Login**:
+   - POST to `/auth/login` with email and password
+   - Use the returned token for authenticated requests
+
 ## Notes
-To send invitation, first signIn as admin and use this token to send invitation to user and use generated token to signup
+
+- Invitation tokens expire after 48 hours
+- Each invitation token can only be used once
+- Clients can only access their own tasks; Admins can access all tasks
+- All passwords are hashed using bcrypt before storage
 
