@@ -144,7 +144,6 @@ This project uses **REST API with Swagger documentation** instead of GraphQL. He
 - `npm run lint` - Run ESLint
 - `npm run format` - Format code with Prettier
 
-```
 
 ## Testing
 
